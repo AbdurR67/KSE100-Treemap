@@ -10,7 +10,7 @@ sectors_df = pd.read_excel(fr'C:\Users\{username}\Dropbox\AR\Sectors_KSE100.xlsx
 url = 'https://dps.psx.com.pk/indices/KSE100'
 data = pd.read_html(url)[0]
 data.columns = ['SYMBOL', 'NAME', 'LDCP', 'CURRENT', 'CHANGE', 'CHANGE (%)', 'IDX WTG (%)', 'IDX POINT', 'VOLUME', 'FREEFLOAT (M)', 'MARKET CAP (M)']
-data['SYMBOL'] = data['SYMBOL'].str.replace('XD', '')
+data['SYMBOL'] = data['SYMBOL'].str.replace(r'(XD|XB|XR)', '', regex=True)
 data['Change (%)'] = data['CHANGE (%)'].str.rstrip('%').astype(float)
 data['CHANGE (%)2'] = data['CHANGE (%)'] #Just to display with % sign
 
